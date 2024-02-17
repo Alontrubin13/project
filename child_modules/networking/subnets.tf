@@ -1,16 +1,8 @@
-resource "aws_subnet" "main" {
-  vpc_id     = aws_vpc.main.id
-  cidr_block = "10.0.1.0/24"
-
-  tags = {
-    Name = "Main"
-  }
-}
 
 resource "aws_subnet" "public_subnet" {
   count = length(var.public_subnets_cidr_blocks)
 
-  vpc_id            = aws_vpc.example.id
+  vpc_id            = aws_vpc.main.id
   cidr_block        = var.public_subnets_cidr_blocks[count.index]
   availability_zone = var.availability_zones[count.index]
 
@@ -22,7 +14,7 @@ resource "aws_subnet" "public_subnet" {
 resource "aws_subnet" "private_subnet" {
   count = length(var.private_subnets_cidr_blocks)
 
-  vpc_id            = aws_vpc.example.id
+  vpc_id            = aws_vpc.main.id
   cidr_block        = var.private_subnets_cidr_blocks[count.index]
   availability_zone = var.availability_zones[count.index]
 
