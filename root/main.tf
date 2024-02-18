@@ -28,4 +28,20 @@ module ec2 {
   public_subnet_id = module.networking.public_subnet_id
 }
 
+module mysql_db {
+  source = "../child_modules/mysql_db"
+  storage = 20
+  db_name = "wordpress"
+  identifier = "wordpress"
+  engine = "mysql"
+  engine_version = "5.7"
+  storage_type = "gp2"
+  instance_class = "db.t2.micro"
+  username = "admin"
+  password = "adminadmin"
+  private_subnet_ids = module.networking.private_subnet_ids
+  rds_security_group = [module.security_groups.rds_security_group]
+}
+
+
 
