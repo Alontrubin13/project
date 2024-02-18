@@ -18,6 +18,16 @@ variable vpc_id {
   type        = string
 }
 
+variable rds_sg_name {
+  type        = string
+}
+
+variable rds_port {
+  type        = number
+}
+
+
+
 
 
 
